@@ -1,0 +1,13 @@
+name: First WorkFlow
+
+on: workflow_dispatch  #workflow_dispatch means we can run workflow manually
+
+jobs: 
+  first-job: 
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Step1 
+        run: echo "Hello World"
+
+      - name: Step2 Bye Print
+        run: echo "Bye !!"  
