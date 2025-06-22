@@ -2,29 +2,32 @@ name: Multi-Stage Pipeline
 
 # Trigger options
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:  # Enables manual trigger
-    # inputs:
-    #   run_build:
-    #     description: 'Run Build Stage'
-    #     required: true
-    #     default: true
-    #     type: boolean
-    #   run_test:
-    #     description: 'Run Test Stage'
-    #     required: true
-    #     default: true
-    #     type: boolean
-    #   run_deploy:
-    #     description: 'Run Deploy Stage'
-    #     required: true
-    #     default: false
-    #     type: boolean
+    inputs:
+      run_build:
+        description: 'Run Build Stage'
+        required: true
+        default: true
+        type: boolean
+      run_test:
+        description: 'Run Test Stage'
+        required: true
+        default: true
+        type: boolean
+      run_deploy:
+        description: 'Run Deploy Stage'
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   # Stage 1: Build
   build:
     runs-on: ubuntu-latest
-    #if: ${{ github.event_name != 'workflow_dispatch' || inputs.run_build }}
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.run_build }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
